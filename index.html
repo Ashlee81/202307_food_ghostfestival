@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- ============== 輪播css ============== -->
+  <link rel="stylesheet" href="https://media.etmall.com.tw/sp/12500/swiper.min.css" />
+  <!-- ============== 共用css ============== -->
+  <link rel="stylesheet" href="https://media.etmall.com.tw/sp/12500/animate.min.css" />
+  <link rel="stylesheet" href="https://media.etmall.com.tw/sp/12500/generate_v1.5.5.css"/>
+  <link rel="stylesheet" href="https://media.etmall.com.tw/sp/12500/build.css" />
+
+  <!-- [電梯步驟1] 電梯CSS 不用就關掉 -->
+  <!-- 商品左電梯CSS，要使用還要在步驟2開啟左電梯data資料 -->
+  <!-- <link id="localElevatorLeft" rel="stylesheet" href="sp-elevator-left.css"> -->
+
+  <!-- 商品右電梯CSS，步驟2有測試div可以測試 -->
+  <link id="localElevatorRight" rel="stylesheet" href="sp-elevator-right.css" />
+  <!-- [電梯步驟1] 電梯CSS END -->
+
+  <style>
+    body {
+      background-color: #fdde42;
+    }
+
+    body:before {
+      background: url(bg-m.jpg) center 0 no-repeat;
+      background-size: 100%;
+    }
+
+    @media screen and (min-width: 960px) {
+      body:before {
+        background: url(bg.jpg) center 0 no-repeat;
+        background-size: auto;
+      }
+    }
+
+    /* 調整logo位置大小 */
+    /* .logo {
+        top: 1%;
+        left: 1%;
+        width: 30%;
+        max-width: 220px;
+      } */
+
+    /* --- 動畫小物件 --- */
+
+    .sp__wallper{
+      overflow: hidden;
+    }
+    .animate__wrap {
+      z-index: 0;
+    }
+    .animate__fix {
+      z-index: 1;
+      transform: none;
+      position: relative; 
+    }
+    .visual--auto .index01{
+      pointer-events: none;
+    }
+
+    /*-- 手機版：設定物件距離左邊與上邊的位置，單位可以使用"%"或"vw";width:建議電腦版可以使用auto，手機版則可使用%調整 --*/
+    .animate__wrap .animate__obj--t {
+      position: absolute;
+      z-index: -1;
+      top: -2.8vw;
+      left: 5vw;
+      width: 89%;
+    }
+    .animate__wrap .animate__obj--s {
+      position: absolute;
+      z-index: -1;
+      top: 27.2vw;
+      left: 1vw;
+      width: 98%;
+    }
+    /* 固定位置 */
+    .animate__fix .animate__obj--cL {
+      position: fixed;
+      z-index: -1;
+      top: 47.2vw;
+      left: -58vw;
+      width: 66%;
+      animation: float 3s ease-in-out infinite alternate;
+      -webkit-animation: float 3s ease-in-out infinite alternate;
+    }
+    @keyframes float {
+              0% {
+              transform: translate(0px);
+              }
+              100% {
+              transform: translate(20px);
+              }
+             
+            }
+    .animate__fix .animate__obj--cR {
+      position: fixed;
+      z-index: -1;
+      top: 35vw;
+      left: 93vw;
+      width: 70%;
+      animation: float02 3s ease-in-out infinite alternate;
+      -webkit-animation: float02 3s ease-in-out infinite alternate;
+    }
+    @keyframes float02 {
+              0% {
+              transform: translate(0px);
+              }
+              100% {
+              transform: translate(-20px);
+              }
+             
+            }
+    .animate__fix .animate__obj--L {
+      position: fixed;
+      z-index: -1;
+      top: 10.2vw;
+      left: 22vw;
+      width: 0%;
+    }
+    .animate__fix .animate__obj--R {
+      position: fixed;
+      z-index: -1;
+      top: 10.2vw;
+      left: 22vw;
+      width: 0%;
+    }
+
+
+    /*-- 電腦版：設定物件距離左邊與上邊的位置，單位可以使用"px"，左邊可以挑整clac()後面的px值;width:建議電腦版可以使用auto，手機版則可使用%調整 --*/
+    @media screen and (min-width: 960px) {
+      .animate__wrap .animate__obj--t {
+        top: -39px;
+        left: calc(50% - 451px);
+        width: auto;
+      }
+      .animate__wrap .animate__obj--s {
+        top: 249px;
+        left: calc(50% - 468px);
+        width: auto;
+      }
+       /* 固定位置 */
+       .animate__fix .animate__obj--cL {
+        position: fixed;
+        top: 728px;
+        left: calc(50% - 1136px);
+        width: auto;
+      }
+      .animate__fix .animate__obj--cR {
+        position: fixed;
+        top: 658px;
+        left: calc(50% - -411px);
+        width: auto;
+      }
+      .animate__fix .animate__obj--L {
+        position: fixed;
+        top: -60px;
+        left: calc(50% - 793px);
+        width: auto;
+      }
+      .animate__fix .animate__obj--R {
+        position: fixed;
+        top: -60px;
+        left: calc(50% - -472px);
+        width: auto;
+      }
+      
+    }
+    /* --- 動畫小物件 end --- */
+
+    /* --- 滑動Banner start --- */
+    .banner__slider {
+      /* 輪播的父層 */
+      z-index: 0;
+    }
+
+    .banner__slider .swipersty__banner {
+      position: absolute;
+      z-index: 0;
+      top: 31.5%;
+      left: 10.9%;
+      width: 78.1%;
+    }
+    /* --- 滑動Banner end --- */
+
+   
+
+    @media screen and (min-width: 1213px){
+      .sp-right__nav a{
+        /* 大網右電梯文字顏色 */
+        /* color: #000; */
+      }
+      .sp-right__nav li a.active, .sp-right__nav a:hover{
+        /* 大網右電梯文字hover顏色 */
+        /* color: #d10001; */
+      }
+      .sp-right__nav li a.active:after, .sp-right__nav a:hover:after{
+        /* 大網右電梯TITLE圈圈的hover顏色 */
+
+        /* border: 3px solid #d10001; */
+      }
+    }
+    /* --- 電梯換色 end--- */
+
+   /* == 單(雙)連結輪播_第二組 == */
+   .promo__slider--2 {
+      position: absolute;
+      z-index: 1;
+      top: 29.2%;
+      /* 小網左邊距離 */
+      left: 0%;
+      /* 小網圖片寬 */
+      width: 100%;
+      /* 圖片原始尺寸 */
+      max-width: 960px;
+      overflow: hidden;
+      padding-bottom: 2%;
+    }
+
+    @media screen and (min-width: 960px) {
+      .promo__slider--2 {
+        /* 大網左邊距離 */
+        left: calc(50% - 476px);
+        overflow: visible;
+      }
+    }
+
+  </style>
+</head>
+<!-- 是否要固定背景，不要就拿掉class -->
+
+<body class="bg-fixed">
+  <div class="navRightBar" id="navRightBar"></div>
+  <div class="elevatorHome js--main--dialog" id="elevatorHome"></div>
+  <div id="barHome"></div>
+  <div class="home--icon layout--main" id="iconHome"></div>
+
+  <div class="sp__wallper" id="spWrap">
+
+    <div class="animate__wrap">
+        <img class="animate__animated animate__obj--t animate__backInDown" src="ani-tt.png" alt="">
+
+        <a class="animate__animated animate__obj--s animate__backInUp animate__delay-1s" href="https://www.etmall.com.tw/Activity/dl/ghost-ichikuji">
+          <img src="ani-sub.png" alt="">
+        </a>
+    </div>
+
+    <div class="animate__fix">
+      <img class="jsAnimateFixed animate__animated animate__obj--cL " src="ani-cloudL.png" alt="">
+      <img class="jsAnimateFixed animate__animated animate__obj--cR " src="ani-cloudR.png" alt="">
+      <img class="jsAnimateFixed animate__animated animate__obj--L " src="ani-L.png" alt="">
+      <img class="jsAnimateFixed animate__animated animate__obj--R " src="ani-R.png" alt="">
+  </div>
+å
+    <main class="sp__main">
+      <div class="layout--main home--logo">
+        <a href="https://www.etmall.com.tw"><img class="logo" src="ehs-logo.png" alt="東森購物" /></a>
+      </div>
+
+      <section class="sp__visual">
+        <div class="layout--main">
+          <ul class="visual--auto clearfix">
+            <li class="visual__fragment width--auto index01"><img src="index_01.png" alt=""></li>
+            <li class="visual__fragment width--auto"><img src="index_02.png" alt=""></li>
+            <!-- 用品 -->
+            <li class="visual__fragment width--auto"><a href="#I"><img src="index_03.png" alt="用品"></a></li>
+            <li class="visual__fragment width--auto"><a href="#C"><img src="index_04.png" alt="米飯"></a></li>
+            <li class="visual__fragment width--auto"><a href="#E"><img src="index_05.png" alt="沖泡"></a></li>
+            <li class="visual__fragment width--auto"><a href="#F"><img src="index_06.png" alt="三牲"></a></li>
+            <li class="visual__fragment width--auto"><a href="#G"><img src="index_07.png" alt="四果"></a></li>
+            <li class="visual__fragment width--auto"><a href="#H"><img src="index_08.png" alt="糕餅"></a></li>
+            <li class="visual__fragment width--auto"><a href="#D"><img src="index_09.png" alt="罐頭"></a></li>
+            <li class="visual__fragment width--auto"><a href="#C"><img src="index_10.png" alt="泡麵"></a></li>
+            <li class="visual__fragment width--auto"><a href="#B"><img src="index_11.png" alt="零食"></a></li>
+            <li class="visual__fragment width--auto"><a href="#A"><img src="index_12.png" alt="飲料"></a></li>
+            <li class="visual__fragment width--auto"><img src="index_13.png" alt=""></li>
+            <!-- 主打品輪播底 -->
+            <li class="visual__fragment width--auto"><img src="index_14.png" alt="主打品標題"></li>
+            <li class="visual__fragment width--auto"><img src="index_15.png" alt="底圖"></li>
+
+            <!-- 美食館獨家活動 -->
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/Activity/dl/ghost-ichikuji"><img src="index_16.png" alt="一翻抽"></a></li>
+            <!-- 聯合活動 -->
+            <li class="visual__fragment width--auto"><a href="https://media.etmall.com.tw/sp/24154/m/index.html"><img src="index_17.png" alt="BUY好擺滿祭中元"></a></li>
+            <li class="visual__fragment width--auto"><a href="https://media.etmall.com.tw/sp/24211/m/index.html"><img src="index_18.png" alt="線上祈福渡中元"></a></li>
+                <!-- 要替換的活動 -->
+            <li class="visual__fragment width--auto"><a href="https://media.etmall.com.tw/sp/20212/m/index.html"><img src="index_19.png" alt="吃貨夏拚季(7/28~7/31)"></a></li>
+
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/bs/165769"><img src="index_20.png" alt="東森小食堂 滿額好禮送"></a></li>
+            <li class="visual__fragment width--auto"><a href="#"><img src="index_21.png" alt="夏日情人約會餐廳特輯"></a></li>
+            <!-- 社群+銀行 -->
+            <li class="visual__fragment width--auto"><a href="https://line.me/ti/g2/o5anXv7IGKPUHyz082FzzTTlSMHqvY_imCBqyQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"><img src="index_22.png" alt="社群"></a></li>
+            <li class="visual__fragment width--auto"><a href="https://media.etmall.com.tw/sp/23825/m/ index.html"><img src="index_23.png" alt="銀行"></a></li>
+            <!-- 品牌活動 -->
+            <li class="visual__fragment width--auto"><img src="index_24.png" alt="品牌活動標題"></li>
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/c3/28821"><img src="index_25.png" alt="西雅圖"></a></li>
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/c3/111679"><img src="index_26.png" alt="彩花蜜"></a></li>
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/c3/158478"><img src="index_27.png" alt="芝初"></a></li>
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/c3/133953"><img src="index_28.png" alt="鮮一杯"></a></li>
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/p/216746"><img src="index_29.png" alt="大甲"></a></li>
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/c3/189573"><img src="index_30.png" alt="王媽媽推薦"></a></li>
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/sp/24069/m/index.html"><img src="index_31.png" alt="統一"></a></li>
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/24063/m/index.html"><img src="index_32.png" alt="可樂"></a></li>
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/sp/24065/m/index.html"><img src="index_33.png" alt="泰山"></a></li>
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/c3/140758"><img src="index_34.png" alt="盛香珍"></a></li>
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/c3/189572"><img src="index_35.png" alt="森永"></a></li>
+            <li class="visual__fragment width--auto"><a href="https://www.etmall.com.tw/bs/158213"><img src="index_36.png" alt="多喝水"></a></li>
+            <li class="visual__fragment width--auto"><img src="index_37.png" alt=""></li>
+          </ul>
+           <!-- 單(雙)連結輪播_第二組 -->
+           <div class="promo__slider--2">
+            <div class="swiper-container" id="sliderMany2">
+              <ul class="swiper-wrapper">
+                <!-- 第一組 -->
+                <li class="swiper-slide">
+                  <div class="slide__block">
+                    <div class="slide__box">
+                      <a href="https://www.etmall.com.tw/i/6790673"><img src="1_01.png" alt="【中元普渡】中元食品拜拜箱-平安經濟組"></a>
+                    </div>
+                    <div class="slide__box">
+                      <a href="https://www.etmall.com.tw/i/6817173"><img src="1_02.png" alt="【中元普渡】中元食品拜拜箱-幸福如意組"></a>
+                    </div>
+                  </div>
+                </li>
+                 <!-- 第二組 -->
+                 <li class="swiper-slide">
+                  <div class="slide__block">
+                    <div class="slide__box">
+                      <a href="https://www.etmall.com.tw/i/#"><img src="2_01.png" alt="【萬歲牌x可樂果】祈福拜拜5件組"></a>
+                    </div>
+                    <div class="slide__box">
+                      <a href="https://www.etmall.com.tw/i/#"><img src="2_02.png" alt="【桂格】中元拜拜-燕麥高纖7件組"></a>
+                    </div>
+                  </div>
+                </li>
+                 <!-- 第三組 -->
+                 <li class="swiper-slide">
+                  <div class="slide__block">
+                    <div class="slide__box">
+                      <a href="https://www.etmall.com.tw/i/6882387"><img src="3_01.png" alt="老欉文旦禮盒"></a>
+                    </div>
+                    <div class="slide__box">
+                      <a href="https://www.etmall.com.tw/i/6870725"><img src="3_02.png" alt="金澎派豪華箱18件組"></a>
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+          <!-- 單(雙)連結輪播_第二組 END -->
+        </div>
+      </section>
+    </main>
+    <!-- 輪播BN -->
+    <section class="banner__slider">
+      <div class="layout--main">
+        <ul class="visual--auto clearfix">
+          <li class="visual__fragment width--auto">
+            <img src="index_38.png" alt="底圖" />
+          </li>
+        </ul>
+        <div class="swipersty__banner">
+          <div class="swiper-container" id="swiperstyBanner">
+            <ul class="swiper-wrapper">
+              <li class="swiper-slide"> <a href="https://www.etmall.com.tw/c3/184784" title="21世紀風味館"><img src="票券_750x328.jpg" alt="21世紀風味館" /></a> </li>
+              <li class="swiper-slide"> <a href="https://media.etmall.com.tw/sp/24067/m/index.html" title="飲料水集合"><img src="750x328_1.jpg" alt="飲料水集合" /></a> </li>
+              <li class="swiper-slide"> <a href="#" title="沖泡sp"><img src="750x328_1.jpg" alt="沖泡sp" /></a> </li>
+              <li class="swiper-slide"> <a href="https://media.etmall.com.tw/sp/22714/m/index.html" title="生鮮行動餐車"><img src="750x328_1.jpg" alt="生鮮行動餐車" /></a> </li>
+              <li class="swiper-slide"> <a href="https://media.etmall.com.tw/sp/19536/m/index.html" title="金蘭食品"><img src="金蘭-750x328.jpg" alt="金蘭食品" /></a> </li>
+              <li class="swiper-slide"> <a href="#" title="零食sp"><img src="750x328_1.jpg" alt="零食sp" /></a> </li>
+              <li class="swiper-slide"> <a href="#" title="熟食SP"><img src="750x328_1.jpg" alt="熟食SP" /></a> </li>
+              <li class="swiper-slide"> <a href="https://www.etmall.com.tw/gp/220587" title="三好米"><img src="750x328_1.jpg" alt="三好米" /></a> </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- ============== 共用JS ============== -->
+  <script src="https://media.etmall.com.tw/sp/12500/jquery-3.6.0.min.js"></script>
+  <script src="https://media.etmall.com.tw/sp/12500/swiper.min.js"></script>
+  <script src="https://media.etmall.com.tw/sp/12500/generate_v1.5.5.js"></script>
+  <!--[電梯步驟2] 電梯 JS -->
+  <!-- 商品左電梯單機版資料，不用就關掉，要使用還要上方步驟1開啟商品左電梯CSS -->
+  <!-- <script id="dataElevatorLeft" src="data-elevator.js"></script> -->
+
+  <!-- 線上自動切換電梯，無論如何都要有 -->
+  <script id="checkElevator" src="https://media.etmall.com.tw/sp/11911/check-elevator.js"></script>
+  <!-- [電梯步驟2] 電梯 JS END -->
+
+  <!-- [測試區] -->
+  <!-- 測試商品右電梯用，上線前必須關掉 -->
+  <!-- <div data-title="ccc"></div> -->
+  <!-- 測試霸道電梯用，開啟時上方自動切換電梯要關閉，這支正式上線時需關閉、上方的要開啟回來 -->
+  <!-- <script id="checkElevator" src="https://media.etmall.com.tw/sp/14841/test-elevator.js?87"></script> -->
+
+  <!-- ============== 滾動動畫 start ============== -->
+  <script src="wow.min.js"></script>
+
+  <script>
+    new WOW().init();
+  </script>
+  <!-- ============== 滾動動畫 end ============== -->
+
+  <!-- ============== 輪播 start ============== -->
+  <script>
+    var promoSliderItem = new Swiper("#swiperstyBanner", {
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+      },
+      grabCursor: true,
+      lazy: {
+        loadPrevNext: true,
+      },
+      loop: true,
+      perspective: true,
+      // effect: "flip",
+      // flipEffect: {
+      //   slideShadows: false,
+      // },
+      slidesPerView: 1,
+      speed: 600,
+      watchSlidesProgress: true,
+      watchSlidesVisibility: true,
+    });
+
+  </script>
+  <!-- ============== 輪播 end ============== -->
+
+  <!-- // 單(雙)連結輪播第二組   -->
+  <script>
+     var sliderMany = new Swiper("#sliderMany2", {
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },  
+    grabCursor: true,
+    loop: true,
+    speed: 1000,
+  });
+  </script>
+  <!-- // 單(雙)連結輪播第二組 end   -->
+</body>
+
+</html>
